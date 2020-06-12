@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Data,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言  如今，数据已成为一个企业重要的财富，90%的市场决策和经营决策都是通过数据分析研究确定的。对数据分析师来说，好的数据源，是数据分析的根基。在整个数据分析流程中，数据采集，是整个数据流的起点，也是最重要的环节之一。采集到的数据质量与准确性直接决定数据广度和质量，影响整个分析报告的所有环节。 在获得高质量数据的过程中，数据埋点这一动作尤为必要，这是针对特定用户行为或事件进行捕获、处理和发送的相">
+<meta name="keywords" content="Data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识数据埋点">
+<meta property="og:url" content="http://lixiaoyu9.github.io/2020/01/19/7.初识数据埋点/index.html">
+<meta property="og:site_name" content="Rain">
+<meta property="og:description" content="前言  如今，数据已成为一个企业重要的财富，90%的市场决策和经营决策都是通过数据分析研究确定的。对数据分析师来说，好的数据源，是数据分析的根基。在整个数据分析流程中，数据采集，是整个数据流的起点，也是最重要的环节之一。采集到的数据质量与准确性直接决定数据广度和质量，影响整个分析报告的所有环节。 在获得高质量数据的过程中，数据埋点这一动作尤为必要，这是针对特定用户行为或事件进行捕获、处理和发送的相">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gb380hqrluj20ij0auwi3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gb38192vk6j20jt08276d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gb381nggqvj20m80ciqpk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gb38265kvrj20vv0m1tlv.jpg">
+<meta property="og:updated_time" content="2020-03-16T07:56:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初识数据埋点">
+<meta name="twitter:description" content="前言  如今，数据已成为一个企业重要的财富，90%的市场决策和经营决策都是通过数据分析研究确定的。对数据分析师来说，好的数据源，是数据分析的根基。在整个数据分析流程中，数据采集，是整个数据流的起点，也是最重要的环节之一。采集到的数据质量与准确性直接决定数据广度和质量，影响整个分析报告的所有环节。 在获得高质量数据的过程中，数据埋点这一动作尤为必要，这是针对特定用户行为或事件进行捕获、处理和发送的相">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gb380hqrluj20ij0auwi3.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lixiaoyu9.github.io/2020/01/19/7.初识数据埋点/">
+
+
+
+
+
+  <title>初识数据埋点 | Rain</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rain</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay Hungry, Stay Foolish</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+    <!-- 页面点击小红心 -->
+<script type="text/javascript">
+!function (e, t, a) {
+  function n() {
+    c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), o(), r()
+  }
+
+  function r() {
+    for (var e = 0; e < d.length; e++) d[e].alpha <= 0 ? (t.body.removeChild(d[e].el), d.splice(e, 1)) : (d[e].y--, d[e].scale += .004, d[e].alpha -= .013, d[e].el.style.cssText = "left:" + d[e].x + "px;top:" + d[e].y + "px;opacity:" + d[e].alpha + ";transform:scale(" + d[e].scale + "," + d[e].scale + ") rotate(45deg);background:" + d[e].color + ";z-index:99999");
+    requestAnimationFrame(r)
+  }
+
+  function o() {
+    var t = "function" == typeof e.onclick && e.onclick;
+    e.onclick = function (e) {
+      t && t(), i(e)
+    }
+  }
+
+  function i(e) {
+    var a = t.createElement("div");
+    a.className = "heart", d.push({
+      el: a,
+      x: e.clientX - 5,
+      y: e.clientY - 5,
+      scale: 1,
+      alpha: 1,
+      color: s()
+    }), t.body.appendChild(a)
+  }
+
+  function c(e) {
+    var a = t.createElement("style");
+    a.type = "text/css";
+    try {
+      a.appendChild(t.createTextNode(e))
+    } catch (t) {
+      a.styleSheet.cssText = e
+    }
+    t.getElementsByTagName("head")[0].appendChild(a)
+  }
+
+  function s() {
+    return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+  }
+
+  var d = [];
+  e.requestAnimationFrame = function () {
+    return e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+      setTimeout(e, 1e3 / 60)
+    }
+  }(), n()
+}(window, document);
+
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lixiaoyu9.github.io/2020/01/19/7.初识数据埋点/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初识数据埋点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-19T18:01:00+08:00">
+                2020-01-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-16T15:56:01+08:00">
+                2020-03-16
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术分享/" itemprop="url" rel="index">
+                    <span itemprop="name">技术分享</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/19/7.初识数据埋点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/19/7.初识数据埋点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/01/19/7.初识数据埋点/" class="leancloud_visitors" data-flag-title="初识数据埋点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+             <span>℃</span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="output_wrapper" id="output_wrapper_id" style="font-size: 15px; color: rgb(62, 62, 62); line-height: 1.8; word-spacing: 2px; letter-spacing: 2px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center"><h3 id="h" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">前言</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">如今，数据已成为一个企业重要的财富，90%的市场决策和经营决策都是通过数据分析研究确定的。对数据分析师来说，好的数据源，是数据分析的根基。在整个数据分析流程中，数据采集，是整个数据流的起点，也是最重要的环节之一。采集到的数据质量与准确性直接决定数据广度和质量，影响整个分析报告的所有环节。<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gb380hqrluj20ij0auwi3.jpg" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em"></figcaption></figure>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">在获得高质量数据的过程中，数据埋点这一动作尤为必要，这是针对特定用户行为或事件进行捕获、处理和发送的相关技术及其实施过程。今天我们来说说如何做好数据埋点，为收集优质数据垒实基础。</p>
+<h3 id="h-1" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">一.什么是数据埋点</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">所谓埋点是数据领域的专业术语，也是互联网应用里的一个俗称。它的学名应该叫做<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">事件追踪</strong>，对应的英文是Event Tracking。它主要是针对特定用户行为或事件进行捕获、处理和发送的相关技术及其实施过程。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">当用户的行为满足某种条件的时候，<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">比如进入某个页面、点击某个按钮等，会自动触发记录和存储，然后这些数据会被收集并被传输到终端提供商，或者是通过后端采集用户使用服务过程中的请求数据</strong>。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">一个典型的埋点采集处理流程如下图所示：<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gb38192vk6j20jt08276d.jpg" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em"></figcaption></figure>
+<h3 id="h-2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">二、为什么要做数据埋点</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">埋点就是为了<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">对产品进行持续追踪，通过深度数据分析不断优化产品</strong>。好比去医院体检，医生测了你身体的各个健康指标，以此来判断你的健康状况。埋点的目的，其实就是随时或者定期监测你的产品的“健康”状况。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">任何一个系统在设计初始阶段只关心核心业务的功能，等到系统上线以后，数据分析师对用户行为分析时会发现缺少很多数据，此时需要采用埋点的方法进行采集需要的数据。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">业务人员主要通过自有或第三方的数据统计平台了解产品的概览性数据指标，包括<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">新增用户数、活跃用户数</strong>等。这些指标能帮助企业宏观的了解用户访问的整体情况和趋势，从整体上把握产品的运营状况，但很难基于这些指标直接得到切实的产品改进策略。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">而埋点将产品数据分析的深度下钻到流量分布和流动层面，<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">通过对产品中的用户交互行为的统计分析，对宏观指标进行深入剖析，发现指标背后的问题，寻找人群的行为特点和关系，洞察用户行为与提升业务价值之间的潜在关联</strong>，了解组成特定数据现象的原因，并据此构建产品优化迭代和运营策略。<br></p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gb381nggqvj20m80ciqpk.jpg" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em"></figcaption></figure>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">对于产品来说，用户在你的产品里做了什么、停留了多久、有什么异样，都是需要关注的。比如用户点击率怎么样？用户在核心使用路径上是否顺畅？有没有得到用户的认可？有没有因为设计按钮过多导致用户行为无效？用户希望有什么样的功能更新等等问题都可以通过埋点的方法实现。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">埋点做好才能用来进行数据驱动产品和精细化运营。而埋点质量的好坏也直接影响到了产品运营的质量。因此它贯穿了产品的整个生命周期，为产品优化指明了方向。所以说，好的数据埋点，就成功了一半。</p>
+<h3 id="h-3" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">三.数据埋点的分类</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">数据埋点具体的方式有三种：<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">代码埋点（手动埋点）、可视化埋点、无埋点（全埋点）</strong>。如果从系统的前后端来讲，埋点又分为前端埋点和后端埋点。无埋点是前端埋点，而代码埋点既是前端埋点又是后端埋点。</p>
+<h4 id="h1" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">1.代码埋点</span></h4>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">在你需要统计数据的关键部位植入N行代码，追踪用户的关键行为，得到想要的数据。简单的说，就是找节点，布代码，收数据。又分为前端代码埋点和后端代码埋点。它是手动编码产生的，自由度高，功能强大，企业可以自定义事件和属性，精准控制监控对象，传输丰富的数据内容。</p>
+<ul style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; padding-left: 32px; list-style-type: disc">
+<li style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-bottom: 0.5em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">前端埋点</span></li>
+</ul>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">前端埋点能够收集更全面、精细的用户数据，尤其是不需要请求服务器的行为数据，如：页面停留时长、页面浏览深度、视频播放时长、用户鼠标轨迹、表单项停留及终止等等，只能通过前端埋点实现。但缺点在于，前端埋点的上报一般存在 15% 左右的延迟上报和漏报（客户端未联网、数据打包上报、用户删除行为数据等原因）。另外，如果客户端是 APP，每次上线新的埋点或者更新埋点时，需要发布新的版本才行，但是会存在部分用户不更新版本情况，影响数据质量。</p>
+<ul style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; padding-left: 32px; list-style-type: disc">
+<li style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-bottom: 0.5em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">后端埋点</span></li>
+</ul>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">理论上，只要客户端向服务器发送过请求，服务端埋点能够收集到。相比于前端埋点，能实时采集数据，不存在延时上报，数据很准确；并且，服务端埋点支持与用户身份信息和行为附带属性信息整合；另外，每次上线新的埋点或者更新埋点时，发布后马上生效。<br>代码埋点适合精细化分析的场景，我们可以将各种细粒度的数据采集下来，后续做深度分析。当然这种埋点方式很低效，需要经历完整的埋点流程，包括业务梳理（产品运营）、埋点设计（产品运营/研发）、实施/测试/上线埋点（研发/测试）。整个过程需要多方协作，且要求产品运营也具备一定的专业水平，如果发生错漏无法快速补救。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（1）优点：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①采集的数据比较具有针对性，更加适合精细化数据分析；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②同时也能提高数据的准确性。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（2）缺点：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①每一个控件的埋点都需要添加相应的代码，不仅工作量大，而且限定了必须是技术开发人员才能完成；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②每一次产品迭代，都需要更新埋点方案。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（3）适用场景：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①有具体的业务分析需求，且按照各个事件埋点的方式不能满足；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②需要对埋点事件进行传参等自定义属性设置。代码埋点虽然较复杂，但功能最完善，覆盖了埋点中的不同业务需求。</p>
+<h4 id="h2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">2.可视化埋点</span></h4>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">由于代码埋点需要终端开发人员来执行采集方案，对业务的功能开发侵入性较高。有的公司开发出了可视化埋点技术，只需要<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">产品与运营人员通过GUI界面进行鼠标简单点击，就可以随时增加、取消、调整采集数据的位置和方式</strong>。比如国外比较早做可视化的是 Mixpanel，国内较早支持可视化埋点的有TalkingData、诸葛 IO，2017年腾讯的 MTA 也宣布支持可视化埋点；相比于手动埋点更新困难，埋点成本高的问题，可视化埋点优化了移动运营中数据采集的流程，<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">避开了终端开发人员的介入，由需求人员直接执行采集，减轻了需求传递过程中的信息损耗和误解</strong>，另外可视化埋点技术往往由服务端直接下发采集的配置文件，而不用走发版流程，从而加快了数据采集的流程。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（1）优点：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①业务人员可用，无需技术人员进行SDK嵌入，不懂代码的产品运营人员也可通过后台可视化界面配置和统计埋点并实时下发到客户端生效；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②无需版本更新，由于不需要嵌入新SDK，不需要发布新版本，可谓即时生效；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">③对所有版本生效：新增埋点在所有版本生效，不存在迭代问题。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（2）缺点：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①可覆盖的功能有限，目前并不是所有控件操作都可以通过这种方案进行定制；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②不能自定义交互事件属性，由于获取的是交互事件元素的DOMpath，无法对具体事件设置参数；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">③不支持可以不断加载的内容瀑布流交互。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（3）适用场景：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①分析或统计需求简单，不需要对埋点事件进行传参等自定义属性设置；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②频繁上线或更新的H5类型的运营活动</p>
+<h4 id="h3" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">3.无埋点</span></h4>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">无埋点又被称为全埋点，是前端自动采集全部事件，上报埋点数据，由后端来过滤和计算出有用的数据。使用这种方案，每次有用户行为分析的需求，不用再走一次完整的埋点流程，只用在产品中嵌入 SDK，等于做了一个统一的埋点。<br>国内GrowingIO在2015年也较早支持了无埋点方案，后面神策等其他第三方也陆续支持了此技术。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（1）优点：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①因为无埋点对页面所有元素进行埋点，那么这个页面每个元素被点击的概率你也就知道，对点击概率比较大的元素可以进行深入分析；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②可以在系统上线后使用，支持基于全量的数据回溯，因为无埋点在你部署SDK的时候数据就一直在收集，可帮助进行启发式、探索式的数据分析；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">③它技术门槛低，部署简单。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（2）缺点：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①无埋点无法采集自定义属性，只使用通用的场景；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②数据形式非业务导向，因为是对所有事件数据的自动收集，没有按照业务需求进行事件或区域设置，业务或数据人员在使用时或许不能直接使用，需要二次计算或处理；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">③兼容性不好，传输时效性较差等问题，因为是对所有的元素数据都收集，会给数据传输和服务器带来较大的压力。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">（3）适用场景：</strong></p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">①分析或统计需求简单，不需要对埋点事件进行传参等自定义属性设置的事件；</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">②针对快速、频繁上线和迭代的H5类型的运营活动的评估</p>
+<blockquote style="line-height: inherit; display: block; padding: 15px 15px 15px 1rem; font-size: 0.9em; margin: 1em 0px; color: rgb(0, 0, 0); border-left: 5px solid rgb(239, 112, 96); background: rgb(239, 235, 233); overflow: auto; overflow-wrap: normal; word-break: normal">
+  <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0px">无埋点相比可视化埋点，在解决数据“回溯”问题上更有优势，如果你想分析某一天某个控件的点击情况，如果你没有针对这个按钮做可视化埋点，则只能从你针对这个按钮做可视化配置的这一时刻之后才有埋点数据，而无埋点，则从你部署SDK那一刻就一直有数据在收集；无埋点做热力图也更有优势，无埋点可以告诉使用者这个界面上每个控件分别被点击的概率是多大，通过热力图清晰可见。</p>
+  <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0px">无埋点确实发送的埋点数量很巨大，比如知乎上就有很多人质疑无埋点解决方案。很多用户对无埋点发送大量埋点请求表示不理解，但是由于无埋点技术方案的限制，无埋点的可交互元素众多，每一次交互都会发送请求，所以会导致网络请求过重。神策等官方文档中也建议无埋点最好使用在那些按钮不是很多的，相对简单的页面。</p>
+</blockquote>
+<h4 id="h-4" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">总结</span></h4>
+<table style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: table; width: 100%; text-align: left">
+<thead style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">
+<tr style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: white">
+<th style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left; font-weight: bold; background-color: rgb(240, 240, 240)">埋点方式</th>
+<th style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left; font-weight: bold; background-color: rgb(240, 240, 240)">优点</th>
+<th style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left; font-weight: bold; background-color: rgb(240, 240, 240)">缺点</th>
+<th style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left; font-weight: bold; background-color: rgb(240, 240, 240)">适用场景</th>
+</tr>
+</thead>
+<tbody style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; border: 0px">
+<tr style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: white">
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">代码埋点-前端</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">1. 能收集非常全面的、精细的用户行为数据，尤其是不需要请求服务器的行为，只能使用前端埋点</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">1. 无网络时数据不完整、实时性有延迟；2. 当需要改变埋点时，必须更新版本（APP）</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">需要最大幅度的、全面的、精细的记录用户在客户端的行为</td>
+</tr>
+<tr style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: rgb(248, 248, 248)">
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">代码埋点-后端</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">1. 实时采集数据，精准；2. 支持与用户身份信息和行为附带属性信息整合；3. 变更成本低；4.能够收集不在APP内发生的行为，只要请求服务器就行。如统计从其他APP引流的安装量</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">1. 不能收集不需要请求服务器的数据；2. 用户不联网不能采集数据</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">需要整合用户身份信息和行为属性信息的埋点，并且对于前后端都能采集的，优先选择后端</td>
+</tr>
+<tr style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: white">
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">可视化埋点</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">1. 无需研发人员介入；2. 不需要发布新版本，即时生效；3. 对所有版本生效：新增埋点在所有版本生效，不存在迭代问题</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">可覆盖的功能有限，目前并不是所有控件操作都可以通过这种方案进行定制</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">产品业务相对简单，可视化埋点配置化能力相对手动埋点更强，是对手动埋点的补充而不是代替，很多手动埋点点都可以通过好的规划和架构变为可视化埋点</td>
+</tr>
+<tr style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: rgb(248, 248, 248)">
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">无埋点</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">每次有用户行为分析的需求，不用再走一次完整的埋点流程，只用在产品中嵌入 SDK，等于做了一个统一的埋点</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">全埋点采集的数据量非常大，随着数据量上升，可能会导致客户端崩溃的概率也会上升。尤其是移动端，更多的数据量意味着更多的电量、流量和内存消耗；第三，即使全部行为数据都被收集回来了，具体分析时也不能避免二次梳理和加工</td>
+<td style="color: inherit; line-height: inherit; margin: 0px; font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left">无埋点最好使用在那些按钮不是很多的，相对简单的页面</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-5" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">四.如何做数据埋点</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">如果你想绘制基础的人群画像你就需要获取用户机型、网络类型、操作系统，IP地域等数据；如果你想分析每一个注册转化率，你就需要获取每一个步骤的点击次数，然后制作成漏斗，看那一步转化率出现了问题……目的不一样，获取的数据也不一样，使用的埋点技术也不一样。</p>
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gb38265kvrj20vv0m1tlv.jpg" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em"></figcaption></figure>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">那么，我们该如何选择埋点方式呢？</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">我们的目的是实现深度数据分析，不应该采用与其他企业通用的埋点方法，应该采用适合自己的埋点方法。也就是做到“因系统而异、避免千系统一面的情况。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">在系统刚上线的初期阶段，我们可以采用无埋点的方式。因为我们通过UV、PV、点击率等基本指标及即可满足数据分析需求。如果产品上线时间很长，我们需要进行深度数据分析则选择代码埋点。它可以帮我们收集需要的属性。另外，如何埋点既可以在前端实现，也可以在后端实现，我们推荐在后端实现。因为<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">后端数据可以保证数据的准确性</strong>。最后，如果您为了方便快捷并且免费，可以<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">选择第三方统计工具</strong>，但是一定要选择适合自己业务的统计工具。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">从业务过程中采集埋点，是数据驱动型公司的必要条件</strong>。一般公司的产品功能评审环节，不仅有 PRD (Product requirement document），还加入了对应的 DRD ( Data requirement document）。对于埋点而言，DRD 需要明确业务目标与埋点缺口之间的关系以及需求的优先级。埋点的需求大多来自于 DRD，整个过程会涉及多个角色，主要包括产品经理、业务数据负责人、开发工程师、测试工程师。</p>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">总之，<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">如果需要深度分析，选择后端（手动）埋点和无埋点组合的方案；如果您只是想看宏观数据，可以选择无埋点</strong>。无论采用哪种埋点方法，一定要慎重，根据需要来设置，最好不要出现错埋或者漏埋的情况。最后，数据分析师一定要和业务工程团队（部署实施埋点的部门）配合好才能实现完美的数据采集方案，有时候沟通比选择埋点方式更重。</p>
+<h4 id="h-6" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">常见的埋点平台参考：</span></h4>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0.2em 0px">growing io： https://www.growingio.com/<br>神策： https://www.sensorsdata.cn/<br>诸葛ＩＯ： https://zhugeio.com/<br>talking data: http://www.talkingdata.com/<br>友盟： https://developer.umeng.com<br>百度统计： https://mtj.baidu.com/web/welcome/login<br>Google Analytics: https://analytics.google.com<br>数猎天下DataHunter：https://www.datahunter.cn/</p></div>
+      
+    </div>
+    
+    
+    
+    
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;font-family: cursive">-------------纸短情长 <i class="fa fa-umbrella"></i> 下次再见-------------</div>
+    
+</div>
+  
+    </div>
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/01/19/7.初识数据埋点/">初识数据埋点</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 -L 的个人博客">-L</a></p>
+  <p><span>发布时间:</span>2020年01月19日 - 18:01</p>
+  <p><span>最后更新:</span>2020年03月16日 - 15:56</p>
+  <p><span>原始链接:</span><a href="/2020/01/19/7.初识数据埋点/" title="初识数据埋点">http://lixiaoyu9.github.io/2020/01/19/7.初识数据埋点/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://lixiaoyu9.github.io/2020/01/19/7.初识数据埋点/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({
+          title: "",
+          text: '复制成功',
+          icon: "success",
+          showConfirmButton: true
+          });
+  });
+    });
+</script>
+
+      
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Data/" rel="tag"><i class="fa fa-tag"></i> Data</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/10/6.初识JVM/" rel="next" title="初识JVM">
+                <i class="fa fa-chevron-left"></i> 初识JVM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/06/8.分布式ID生成方式总结/" rel="prev" title="分布式ID生成方式总结">
+                分布式ID生成方式总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="-L">
+            
+              <p class="site-author-name" itemprop="name">-L</p>
+              <p class="site-description motion-element" itemprop="description">性感码农，在线搬砖</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lixiaoyu9" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3579932245" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28285910&auto=1&height=66"></iframe>
+</div>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#h"><span class="nav-text">前言 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-1"><span class="nav-text">一.什么是数据埋点 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-2"><span class="nav-text">二、为什么要做数据埋点 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-3"><span class="nav-text">三.数据埋点的分类 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#h1"><span class="nav-text">1.代码埋点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#h2"><span class="nav-text">2.可视化埋点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#h3"><span class="nav-text">3.无埋点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#h-4"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-5"><span class="nav-text">四.如何做数据埋点 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#h-6"><span class="nav-text">常见的埋点平台参考：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">-L</span>
+
+  <!--
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">64.6k</span>
+  
+  -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    <span class="site-pv">
+      <i class="fa fa-pencil"></i>
+      博客全站共： <span class="post-count">64.6k</span> 字
+    </span>
+</div>
+<!-- 新增访客统计代码 END-->
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/28/2019 16:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '6k5t2CqVFuU3kw2zqz5i8rbW-gzGzoHsz',
+        appKey: 'NseoS2yHhvLXynckQaqKS0fP',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("6k5t2CqVFuU3kw2zqz5i8rbW-gzGzoHsz", "NseoS2yHhvLXynckQaqKS0fP");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
