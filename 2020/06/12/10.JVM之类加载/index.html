@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="一文带你吃透JVM类加载机制 类加载过程  首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去 package&amp;nbsp;com.lxy.jvm;public&amp;nbsp;class&amp;nbsp;Hello&amp;nbsp;{&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;private&amp;nbsp;static&amp;nbsp;int&amp;nbsp;a&amp;nbsp;=&amp;nbs">
+<meta name="description" content="JVM之类加载 类加载过程  首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去 package&amp;nbsp;com.lxy.jvm;public&amp;nbsp;class&amp;nbsp;Hello&amp;nbsp;{&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;private&amp;nbsp;static&amp;nbsp;int&amp;nbsp;a&amp;nbsp;=&amp;nbsp;0;&amp;nb">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一文带你吃透JVM类加载机制">
-<meta property="og:url" content="http://lixiaoyu9.github.io/2020/06/12/10.一文带你吃透JVM类加载机制/index.html">
+<meta property="og:title" content="JVM之类加载">
+<meta property="og:url" content="http://lixiaoyu9.github.io/2020/06/12/10.JVM之类加载/index.html">
 <meta property="og:site_name" content="Rain">
-<meta property="og:description" content="一文带你吃透JVM类加载机制 类加载过程  首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去 package&amp;nbsp;com.lxy.jvm;public&amp;nbsp;class&amp;nbsp;Hello&amp;nbsp;{&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;private&amp;nbsp;static&amp;nbsp;int&amp;nbsp;a&amp;nbsp;=&amp;nbs">
+<meta property="og:description" content="JVM之类加载 类加载过程  首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去 package&amp;nbsp;com.lxy.jvm;public&amp;nbsp;class&amp;nbsp;Hello&amp;nbsp;{&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;private&amp;nbsp;static&amp;nbsp;int&amp;nbsp;a&amp;nbsp;=&amp;nbsp;0;&amp;nb">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfpc5nffwij217a11w7c3.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfpc6htribj210u0fcq4u.jpg">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfpc8grfq0j20ah0am3yp.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfpc8quw08j20cd0d4gmq.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfpc945h2uj20jo02emxj.jpg">
-<meta property="og:updated_time" content="2020-06-12T08:37:11.005Z">
+<meta property="og:updated_time" content="2020-06-16T08:54:22.714Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一文带你吃透JVM类加载机制">
-<meta name="twitter:description" content="一文带你吃透JVM类加载机制 类加载过程  首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去 package&amp;nbsp;com.lxy.jvm;public&amp;nbsp;class&amp;nbsp;Hello&amp;nbsp;{&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;private&amp;nbsp;static&amp;nbsp;int&amp;nbsp;a&amp;nbsp;=&amp;nbs">
+<meta name="twitter:title" content="JVM之类加载">
+<meta name="twitter:description" content="JVM之类加载 类加载过程  首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去 package&amp;nbsp;com.lxy.jvm;public&amp;nbsp;class&amp;nbsp;Hello&amp;nbsp;{&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;private&amp;nbsp;static&amp;nbsp;int&amp;nbsp;a&amp;nbsp;=&amp;nbsp;0;&amp;nb">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfpc5nffwij217a11w7c3.jpg">
 
 
@@ -137,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://lixiaoyu9.github.io/2020/06/12/10.一文带你吃透JVM类加载机制/">
+  <link rel="canonical" href="http://lixiaoyu9.github.io/2020/06/12/10.JVM之类加载/">
 
 
 
 
 
-  <title>一文带你吃透JVM类加载机制 | Rain</title>
+  <title>JVM之类加载 | Rain</title>
   
 
 
@@ -366,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lixiaoyu9.github.io/2020/06/12/10.一文带你吃透JVM类加载机制/">
+    <link itemprop="mainEntityOfPage" href="http://lixiaoyu9.github.io/2020/06/12/10.JVM之类加载/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="-L">
@@ -383,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一文带你吃透JVM类加载机制</h1>
+          <h1 class="post-title" itemprop="name headline">JVM之类加载</h1>
         
 
         <div class="post-meta">
@@ -411,8 +411,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-12T16:37:11+08:00">
-                2020-06-12
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-16T16:54:22+08:00">
+                2020-06-16
               </time>
             
           </span>
@@ -448,8 +448,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/06/12/10.一文带你吃透JVM类加载机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/12/10.一文带你吃透JVM类加载机制/" itemprop="commentCount"></span>
+                <a href="/2020/06/12/10.JVM之类加载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/12/10.JVM之类加载/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -457,7 +457,7 @@
 
           
           
-             <span id="/2020/06/12/10.一文带你吃透JVM类加载机制/" class="leancloud_visitors" data-flag-title="一文带你吃透JVM类加载机制">
+             <span id="/2020/06/12/10.JVM之类加载/" class="leancloud_visitors" data-flag-title="JVM之类加载">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -519,7 +519,7 @@
       
 
       
-        <div class="output_wrapper" id="output_wrapper_id" style="font-size: 15px; color: rgb(62, 62, 62); line-height: 1.8; word-spacing: 2px; letter-spacing: 2px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center"><h1 id="hjvm" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.6em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">一文带你吃透JVM类加载机制</span></h1>
+        <div class="output_wrapper" id="output_wrapper_id" style="font-size: 15px; color: rgb(62, 62, 62); line-height: 1.8; word-spacing: 2px; letter-spacing: 2px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center"><h1 id="hjvm" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.6em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">JVM之类加载</span></h1>
 <h2 id="h" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">类加载过程</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h2>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">首先看下面这段代码，在执行main函数的时候，先会通过类加载器，将用到的类加载到JVM内存中去</p>
 <pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><code class="java language-java hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; color: rgb(56, 58, 66); background: rgb(250, 250, 250); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important"><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">package</span>&nbsp;com.lxy.jvm;<br><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">public</span>&nbsp;<span class="hljs-class" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; word-wrap: inherit !important; word-break: inherit !important"><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">class</span>&nbsp;<span class="hljs-title" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(193, 132, 1); word-wrap: inherit !important; word-break: inherit !important">Hello</span>&nbsp;</span>{<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">private</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">static</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">int</span>&nbsp;a&nbsp;=&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(152, 104, 1); word-wrap: inherit !important; word-break: inherit !important">0</span>;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-function" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; word-wrap: inherit !important; word-break: inherit !important"><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">private</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">void</span>&nbsp;<span class="hljs-title" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(64, 120, 242); word-wrap: inherit !important; word-break: inherit !important">sayHello</span><span class="hljs-params" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; word-wrap: inherit !important; word-break: inherit !important">()</span>&nbsp;</span>{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(80, 161, 79); word-wrap: inherit !important; word-break: inherit !important">"hello&nbsp;world"</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-function" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; word-wrap: inherit !important; word-break: inherit !important"><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">public</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">static</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">void</span>&nbsp;<span class="hljs-title" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(64, 120, 242); word-wrap: inherit !important; word-break: inherit !important">main</span><span class="hljs-params" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; word-wrap: inherit !important; word-break: inherit !important">(String[]&nbsp;args)</span>&nbsp;</span>{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello&nbsp;hello&nbsp;=&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(166, 38, 164); word-wrap: inherit !important; word-break: inherit !important">new</span>&nbsp;Hello();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hello.sayHello();<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br></code></pre>
@@ -681,12 +681,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2020/06/12/10.一文带你吃透JVM类加载机制/">一文带你吃透JVM类加载机制</a></p>
+  <p><span>本文标题:</span><a href="/2020/06/12/10.JVM之类加载/">JVM之类加载</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 -L 的个人博客">-L</a></p>
   <p><span>发布时间:</span>2020年06月12日 - 15:10</p>
-  <p><span>最后更新:</span>2020年06月12日 - 16:37</p>
-  <p><span>原始链接:</span><a href="/2020/06/12/10.一文带你吃透JVM类加载机制/" title="一文带你吃透JVM类加载机制">http://lixiaoyu9.github.io/2020/06/12/10.一文带你吃透JVM类加载机制/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://lixiaoyu9.github.io/2020/06/12/10.一文带你吃透JVM类加载机制/" aria-label="复制成功！"></i></span>
+  <p><span>最后更新:</span>2020年06月16日 - 16:54</p>
+  <p><span>原始链接:</span><a href="/2020/06/12/10.JVM之类加载/" title="JVM之类加载">http://lixiaoyu9.github.io/2020/06/12/10.JVM之类加载/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://lixiaoyu9.github.io/2020/06/12/10.JVM之类加载/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
 </div>
@@ -738,6 +738,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/16/11.JVM之内存模型/" rel="prev" title="JVM之内存模型">
+                JVM之内存模型 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -819,7 +823,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -893,7 +897,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hjvm"><span class="nav-text">一文带你吃透JVM类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#h"><span class="nav-text">类加载过程 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-1"><span class="nav-text">加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-2"><span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-3"><span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-4"><span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-5"><span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-6"><span class="nav-text">类加载器 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-7"><span class="nav-text">三种类加载器+自定义加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-8"><span class="nav-text">类加载器初始化过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-9"><span class="nav-text">双亲委派机制 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-10"><span class="nav-text">从源码看双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-11"><span class="nav-text">为什么要双亲委派？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-12"><span class="nav-text">打破双亲委派机制 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-13"><span class="nav-text">实现一个自定义类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-14"><span class="nav-text">通过自定义类加载器简单实现打破双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htomcat"><span class="nav-text">Tomcat打破双亲委派</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hjvm"><span class="nav-text">JVM之类加载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#h"><span class="nav-text">类加载过程 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-1"><span class="nav-text">加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-2"><span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-3"><span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-4"><span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-5"><span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-6"><span class="nav-text">类加载器 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-7"><span class="nav-text">三种类加载器+自定义加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-8"><span class="nav-text">类加载器初始化过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-9"><span class="nav-text">双亲委派机制 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-10"><span class="nav-text">从源码看双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-11"><span class="nav-text">为什么要双亲委派？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-12"><span class="nav-text">打破双亲委派机制 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#h-13"><span class="nav-text">实现一个自定义类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h-14"><span class="nav-text">通过自定义类加载器简单实现打破双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htomcat"><span class="nav-text">Tomcat打破双亲委派</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -928,7 +932,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64.6k</span>
+    <span title="Site words total count">67.8k</span>
   
   -->
 </div>
@@ -959,7 +963,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">64.6k</span> 字
+      博客全站共： <span class="post-count">67.8k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
