@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfu58ml1vvj210y0d6dig.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfu5mseixuj20ng0ogdjg.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gfu7q5e5hej20g70afglv.jpg">
-<meta property="og:updated_time" content="2020-06-16T08:55:12.562Z">
+<meta property="og:updated_time" content="2020-06-22T08:48:34.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM之内存模型">
 <meta name="twitter:description" content="JVM之内存模型 前言  本文主要介绍JVM内存模型和部分参数，文字内容比较多，同时配了图，方便大家理解。 JDK体系结构   JVM介绍  基本概念 JVM 是 Java Virtual Machine 的缩写，它是可运行 Java 代码的假想计算机 ，是一种规范，它的具体实现有HotSpot VM等。    JVM其实就类似于一台小电脑运行在windows或者linux这些操作系统环境下即可。">
@@ -408,8 +408,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-16T16:55:12+08:00">
-                2020-06-16
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T16:48:34+08:00">
+                2020-06-22
               </time>
             
           </span>
@@ -573,7 +573,7 @@
 </blockquote>
 <h3 id="hjava" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.3em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">Java堆</span></h3>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">是被线程共享的一块内存区域， <strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">创建的对象和数组都保存在 Java 堆内存中，也是垃圾收集器进行垃圾收集的最重要的内存区域</strong>。 由于现代 VM 采用分代收集算法， 因此 Java 堆从 GC 的角度还可以细分为: <strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">新生代(Young区)和老年代(Old区)</strong> 。</p>
-<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gfu58ml1vvj210y0d6dig.jpg" alt="image-20200616150540136.png" title="image-20200616150540136.png" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">image-20200616150540136.png</figcaption></figure>
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gfu58ml1vvj210y0d6dig.jpg" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">image-20200616150540136.png</figcaption></figure>
 <h4 id="h-7" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">新生代</span></h4>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">用来存放新生的对象。一般占据堆的 1/3 空间。由于频繁创建对象，所以新生代会频繁触发MinorGC 进行垃圾回收。<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">新生代又分为 Eden 区、 SurvivorFrom、 SurvivorTo三个区</strong>。  </p>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">Eden 区 ：</strong>Java 新对象的出生地（如果新创建的对象占用内存很大，则直接分配到老年代）。当 Eden 区内存不够的时候就会触发 MinorGC，对新生代区进行一次垃圾回收。  </p>
@@ -628,7 +628,7 @@
   <p><span>本文标题:</span><a href="/2020/06/16/11.JVM之内存模型/">JVM之内存模型</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 -L 的个人博客">-L</a></p>
   <p><span>发布时间:</span>2020年06月16日 - 16:54</p>
-  <p><span>最后更新:</span>2020年06月16日 - 16:55</p>
+  <p><span>最后更新:</span>2020年06月22日 - 16:48</p>
   <p><span>原始链接:</span><a href="/2020/06/16/11.JVM之内存模型/" title="JVM之内存模型">http://lixiaoyu9.github.io/2020/06/16/11.JVM之内存模型/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://lixiaoyu9.github.io/2020/06/16/11.JVM之内存模型/" aria-label="复制成功！"></i></span>
   </p>

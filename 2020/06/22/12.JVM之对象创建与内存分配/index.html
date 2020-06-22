@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gg13th23kaj20y60oe3zw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gg13ugcw3yj215b0a9whv.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d5616e55ly1gg13vzylj0j20ua0l0th9.jpg">
-<meta property="og:updated_time" content="2020-06-22T08:44:53.030Z">
+<meta property="og:updated_time" content="2020-06-22T08:47:54.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM之对象创建与内存分配">
 <meta name="twitter:description" content="JVM之对象创建与内存分配 前言  Java是一门面向对象的语言，在我们运行的程序中，无数的对象被创建出来，那么对象到底是如何被创建的呢？在JVM中又是如何实现的呢？    本文概念文字比较多，请做好准备  对象创建过程  在我们创建对象时候，在JVM中的流程是如下图所示的： 对象创建过程 1. 类加载检查 虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一 个类的符号">
@@ -406,7 +406,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T16:44:53+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T16:47:54+08:00">
                 2020-06-22
               </time>
             
@@ -522,7 +522,7 @@
 </blockquote>
 <h2 id="h-1" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">对象创建过程</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h2>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">在我们创建对象时候，在JVM中的流程是如下图所示的：</p>
-<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gg13suhzjcj20pm0sqgnk.jpg" alt="对象创建过程" title="对象创建过程" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">对象创建过程</figcaption></figure>
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gg13suhzjcj20pm0sqgnk.jpg" alt="对象创建过程" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">对象创建过程</figcaption></figure>
 <h3 id="h1" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.3em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">1. 类加载检查</span></h3>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">虚拟机遇到一条new指令时，<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">首先将去检查这个指令的参数是否能在常量池中定位到一 个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过</strong>。如果没有，那必须先执行相应的类加载过程。</p>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">new指令对应到语言层面上讲是，new关键词、对象克隆、对象序列化。</p>
@@ -536,7 +536,7 @@
 <h4 id="h-2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.2em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">划分内存的方法</strong></span></h4>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">指针碰撞</strong>（Bump the Pointer）</p>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">如果Java堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离。</p>
-<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gg13th23kaj20y60oe3zw.jpg" alt="指针碰撞" title="指针碰撞" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">指针碰撞</figcaption></figure>
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gg13th23kaj20y60oe3zw.jpg" alt="指针碰撞" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">指针碰撞</figcaption></figure>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">空闲列表</strong>（Free List）</p>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">如果Java堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录上哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例， 并更新列表上的记录。</p>
 <blockquote style="line-height: inherit; display: block; padding: 15px 15px 15px 1rem; font-size: 0.9em; margin: 1em 0px; color: rgb(0, 0, 0); border-left: 5px solid rgb(239, 112, 96); background: rgb(239, 235, 233); overflow: auto; overflow-wrap: normal; word-break: normal">
@@ -555,7 +555,7 @@
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">执行方法，即对象按照程序员的意愿进行初始化。对应到语言层面上讲，就是为属性赋值（注意，这与上面的赋零值不同，这是由程序员赋的值），和执行构造方法。</p>
 <h2 id="h-4" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid rgb(239, 112, 96); font-size: 1.3em"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: rgb(239, 112, 96); color: rgb(255, 255, 255); padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px">对象内部存储布局</span><span style="display: inline-block; vertical-align: bottom; border-bottom: 36px solid rgb(239, 235, 233); border-right: 20px solid transparent"> </span></h2>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px">在HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：对象头（Header）、 实例数据（Instance Data）和对齐填充（Padding）。</p>
-<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gg13ugcw3yj215b0a9whv.jpg" alt="对象头" title="对象头" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">对象头</figcaption></figure>
+<figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px"><img src="http://ww1.sinaimg.cn/large/d5616e55ly1gg13ugcw3yj215b0a9whv.jpg" alt="对象头" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em">对象头</figcaption></figure>
 <h3 id="hheader" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; font-size: 1.3em"><span style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px">对象头(Header)</span></h3>
 <p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: rgb(233, 105, 0)">Mark Word + Klass Pointer + 数组长度(只有数组对象才有)</strong></p>
 <ul style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; padding-left: 32px; list-style-type: disc">
@@ -701,7 +701,7 @@
   <p><span>本文标题:</span><a href="/2020/06/22/12.JVM之对象创建与内存分配/">JVM之对象创建与内存分配</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 -L 的个人博客">-L</a></p>
   <p><span>发布时间:</span>2020年06月22日 - 23:41</p>
-  <p><span>最后更新:</span>2020年06月22日 - 16:44</p>
+  <p><span>最后更新:</span>2020年06月22日 - 16:47</p>
   <p><span>原始链接:</span><a href="/2020/06/22/12.JVM之对象创建与内存分配/" title="JVM之对象创建与内存分配">http://lixiaoyu9.github.io/2020/06/22/12.JVM之对象创建与内存分配/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://lixiaoyu9.github.io/2020/06/22/12.JVM之对象创建与内存分配/" aria-label="复制成功！"></i></span>
   </p>
